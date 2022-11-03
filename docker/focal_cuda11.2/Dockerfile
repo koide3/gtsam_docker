@@ -23,9 +23,11 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /root
-RUN git clone https://github.com/koide3/iridescence.git --recursive
-WORKDIR /root/iridescence/build
-RUN cmake ..
-RUN make -j$(nproc) && make install
+RUN git clone https://github.com/koide3/iridescence.git --recursive \
+  && mkdir iridescence/build && cd iridescence/build \
+  && cmake .. \
+  && make -j$(nproc) \
+  && make install \
+  && rm -rf /root/iridescence
 
 CMD ["bash"]

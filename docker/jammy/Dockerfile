@@ -15,21 +15,25 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /root
-RUN git clone https://github.com/borglab/gtsam.git
-WORKDIR /root/gtsam/build
-RUN cmake .. \
+RUN git clone https://github.com/borglab/gtsam.git \
+  && mkdir gtsam/build && cd gtsam/build \
+  && cmake .. \
   -DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF \
   -DGTSAM_BUILD_TESTS=OFF \
   -DGTSAM_WITH_TBB=OFF \
   -DGTSAM_BUILD_WITH_MARCH_NATIVE=OFF \
   -DGTSAM_USE_SYSTEM_EIGEN=ON \
-  -DGTSAM_USE_SYSTEM_METIS=ON
-RUN make -j$(nproc) && make install
+  -DGTSAM_USE_SYSTEM_METIS=ON \
+  && make -j$(nproc) \
+  && make install \
+  && rm -rf /root/gtsam
 
 WORKDIR /root
-RUN git clone https://github.com/koide3/iridescence.git --recursive
-WORKDIR /root/iridescence/build
-RUN cmake ..
-RUN make -j$(nproc) && make install
+RUN git clone https://github.com/koide3/iridescence.git --recursive \
+  && mkdir iridescence/build && cd iridescence/build \
+  && cmake .. \
+  && make -j$(nproc) \
+  && make install \
+  && rm -rf /root/iridescence
 
 CMD ["bash"]
