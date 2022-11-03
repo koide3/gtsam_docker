@@ -1,6 +1,8 @@
 name: Build
 
 on:
+  schedule:
+    - cron: '* * * * 0'
   push:
     branches: [ master ]
     paths-ignore: '**.md'
@@ -16,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        DISTRO: [jammy]
+        DISTRO: [focal, focal_cuda11.2, jammy, jammy_cuda11.8]
 
     steps:
       - uses: actions/checkout@v2
