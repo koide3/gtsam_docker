@@ -14,7 +14,7 @@ RUN apt-get update \
   && add-apt-repository ppa:borglab/gtsam-develop \
   # install dependencies
   && apt-get install --no-install-recommends -y \
-    wget nano build-essential clang lld \
+    wget nano build-essential clang lld libomp-dev \
     git cmake libeigen3-dev ca-certificates \
     libtbb-dev libboost-all-dev libgtest-dev libmetis-dev \
     libgtsam-dev libgtsam-unstable-dev \

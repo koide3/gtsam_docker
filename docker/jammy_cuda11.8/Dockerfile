@@ -10,7 +10,7 @@ RUN apt-get update \
   && apt-get upgrade -y \
   # install dependencies
   && apt-get install --no-install-recommends -y \
-    wget nano build-essential clang lld \
+    wget nano build-essential clang lld libomp-dev \
     git cmake libeigen3-dev ca-certificates \
     libtbb-dev libboost-all-dev libgtest-dev libmetis-dev \
     libglm-dev libglfw3-dev libpng-dev libjpeg-dev \
