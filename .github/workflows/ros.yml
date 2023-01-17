@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        DISTRO: [foxy, humble]
+        DISTRO: [noetic, foxy, humble]
 
     steps:
       - uses: actions/checkout@v3
