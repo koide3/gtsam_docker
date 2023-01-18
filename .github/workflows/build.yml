@@ -46,6 +46,7 @@ jobs:
           push: true
 
   build_ros:
+    needs: build
     runs-on: ubuntu-latest
     strategy:
       matrix:
