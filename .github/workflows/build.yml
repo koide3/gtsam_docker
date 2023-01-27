@@ -52,7 +52,7 @@ jobs:
           build-args: |
             BASE_IMAGE=${{ matrix.DISTRO.base_image }}
             GTSAM_TAG=$GTSAM_TAG
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           context: .
           push: true
 
@@ -62,9 +62,9 @@ jobs:
     strategy:
       matrix:
         DISTRO: [
-          ["noetic", "focal"],
-          ["foxy", "focal"],
-          ["humble", "jammy"]
+          { name: "noetic", "base_image": "focal" },
+          { name: "foxy", "base_image": "focal" },
+          { name: "humble", "base_image": "jammy" }
         ]
 
     steps:
@@ -88,6 +88,9 @@ jobs:
         with:
           file: ${{github.workspace}}/docker/${{ matrix.DISTRO }}/Dockerfile
           tags: koide3/gtsam_docker:${{ matrix.DISTRO }}
-          platforms: linux/amd64,linux/arm64
+          build-args: |
+            BASE_IMAGE=koide3/gtsam_docker:${{ matrix.DISTRO.base_image }}
+            GTSAM_TAG=$GTSAM_TAG
+          platforms: linux/amd64
           context: .
           push: true
