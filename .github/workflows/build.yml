@@ -22,10 +22,10 @@ jobs:
     strategy:
       matrix:
         DISTRO: [
-          [focal, ubuntu:focal],
-          [focal_cuda11.2, nvidia/cuda:11.2.2-devel-ubuntu20.04],
-          [jammy, ubuntu:jammy],
-          [jammy_cuda11.8, nvidia/cuda:11.8.0-devel-ubuntu22.04],
+          ["focal", "ubuntu:focal"],
+          ["focal_cuda11.2", "nvidia/cuda:11.2.2-devel-ubuntu20.04"],
+          ["jammy", "ubuntu:jammy"],
+          ["jammy_cuda11.8", "nvidia/cuda:11.8.0-devel-ubuntu22.04"],
         ]
 
     steps:
