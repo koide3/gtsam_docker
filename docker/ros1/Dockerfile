@@ -2,6 +2,7 @@ ARG BASE_IMAGE=koide3/gtsam_docker:focal
 FROM ${BASE_IMAGE}
 ARG ROS_DISTRO=noetic
 
+RUN echo ROS_DISTRO=$ROS_DISTRO
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH

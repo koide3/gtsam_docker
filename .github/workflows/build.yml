@@ -13,19 +13,16 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-env:
-  GTSAM_TAG: 4.2a8
-
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         DISTRO: [
-          { name: "focal", base_image: "ubuntu:focal"},
-          { name: "focal_cuda11.2", base_image: "nvidia/cuda:11.2.2-devel-ubuntu20.04"},
-          { name: "jammy", base_image: "ubuntu:jammy"},
-          { name: "jammy_cuda11.8", base_image: "nvidia/cuda:11.8.0-devel-ubuntu22.04"},
+          { name: "focal", base_image: "ubuntu:focal" },
+          { name: "focal_cuda11.2", base_image: "nvidia/cuda:11.2.2-devel-ubuntu20.04" },
+          { name: "jammy", base_image: "ubuntu:jammy" },
+          { name: "jammy_cuda11.8", base_image: "nvidia/cuda:11.8.0-devel-ubuntu22.04" },
         ]
 
     steps:
@@ -44,17 +41,17 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Docker build
-        uses: docker/build-push-action@v3
-        with:
-          file: ${{github.workspace}}/docker/ubuntu/Dockerfile
-          tags: koide3/gtsam_docker:${{ matrix.DISTRO.name }}
-          build-args: |
-            BASE_IMAGE=${{ matrix.DISTRO.base_image }}
-            GTSAM_TAG=$GTSAM_TAG
-          platforms: linux/amd64
-          context: .
-          push: true
+      # - name: Docker build
+      #   uses: docker/build-push-action@v3
+      #   with:
+      #     file: ${{github.workspace}}/docker/ubuntu/Dockerfile
+      #     tags: koide3/gtsam_docker:${{ matrix.DISTRO.name }}
+      #     build-args: |
+      #       "GTSAM_TAG=4.2a8"
+      #       "BASE_IMAGE=${{ matrix.DISTRO.base_image }}"
+      #     platforms: linux/amd64
+      #     context: .
+      #     push: true
 
   build_ros:
     needs: build
@@ -62,9 +59,9 @@ jobs:
     strategy:
       matrix:
         DISTRO: [
-          { distro: "noetic", "base_image": "focal", "ros_version": "ros1" },
-          { distro: "foxy", "base_image": "focal", "ros_version": "ros2" },
-          { distro: "humble", "base_image": "jammy", "ros_version": "ros2" }
+          { "distro": "noetic", "base_image": "focal", "ros_version": "ros1" },
+          { "distro": "foxy", "base_image": "focal", "ros_version": "ros2" },
+          { "distro": "humble", "base_image": "jammy", "ros_version": "ros2" }
         ]
 
     steps:
