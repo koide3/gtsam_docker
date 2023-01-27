@@ -62,9 +62,9 @@ jobs:
     strategy:
       matrix:
         DISTRO: [
-          { name: "noetic", "base_image": "focal" },
-          { name: "foxy", "base_image": "focal" },
-          { name: "humble", "base_image": "jammy" }
+          { distro: "noetic", "base_image": "focal", "ros_version": "ros1" },
+          { distro: "foxy", "base_image": "focal", "ros_version": "ros2" },
+          { distro: "humble", "base_image": "jammy", "ros_version": "ros2" }
         ]
 
     steps:
@@ -86,11 +86,11 @@ jobs:
       - name: Docker build
         uses: docker/build-push-action@v3
         with:
-          file: ${{github.workspace}}/docker/${{ matrix.DISTRO }}/Dockerfile
-          tags: koide3/gtsam_docker:${{ matrix.DISTRO }}
+          file: ${{github.workspace}}/docker/${{ matrix.DISTRO.ros_version }}/Dockerfile
+          tags: koide3/gtsam_docker:${{ matrix.DISTRO.distro }}
           build-args: |
             BASE_IMAGE=koide3/gtsam_docker:${{ matrix.DISTRO.base_image }}
-            GTSAM_TAG=$GTSAM_TAG
+            ROS_DISTRO=${{ matrix.DISTRO.distro }}
           platforms: linux/amd64
           context: .
           push: true
