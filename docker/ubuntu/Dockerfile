@@ -21,8 +21,10 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /root
-RUN git clone https://github.com/borglab/gtsam.git -b ${GTSAM_TAG} \
-  && mkdir gtsam/build && cd gtsam/build \
+RUN git clone https://github.com/borglab/gtsam.git \
+  && cd gtsam \
+  && git checkout ${GTSAM_TAG} \
+  && mkdir build && cd build \
   && cmake .. \
   -DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF \
   -DGTSAM_BUILD_TESTS=OFF \
