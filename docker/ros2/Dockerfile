@@ -1,4 +1,7 @@
-FROM koide3/gtsam_docker:focal
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+ARG ROS_DISTRO
+ENV ROS_DISTRO=$ROS_DISTRO
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
@@ -12,7 +15,7 @@ RUN apt-get update \
   && apt-get install --no-install-recommends -y \
     python3-colcon-common-extensions \
     python3-rosdep \
-    ros-foxy-ros-base \
+    ros-${ROS_DISTRO}-ros-base \
   # clean
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
