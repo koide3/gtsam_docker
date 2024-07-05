@@ -21,6 +21,7 @@ jobs:
         DISTRO: [
           { name: "focal", base_image: "ubuntu:focal" },
           { name: "focal_cuda11.2", base_image: "nvidia/cuda:11.2.2-devel-ubuntu20.04" },
+          { name: "focal_cuda12.2", base_image: "nvidia/cuda:12.2.2-devel-ubuntu20.04" },
           { name: "jammy", base_image: "ubuntu:jammy" },
           { name: "jammy_cuda11.8", base_image: "nvidia/cuda:11.8.0-devel-ubuntu22.04" },
           { name: "jammy_cuda12.2", base_image: "nvidia/cuda:12.2.2-devel-ubuntu22.04" },
