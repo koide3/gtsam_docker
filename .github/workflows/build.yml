@@ -66,7 +66,7 @@ jobs:
         DISTRO: [
           { "distro": "noetic", "base_image": "focal", "ros_version": "ros1" },
           { "distro": "foxy", "base_image": "focal", "ros_version": "ros2" },
-          { "distro": "humble", "base_image": "jammy", "ros_version": "ros2" }
+          { "distro": "humble", "base_image": "jammy", "ros_version": "ros2" },
           { "distro": "jazzy", "base_image": "noble", "ros_version": "ros2" }
         ]
 
