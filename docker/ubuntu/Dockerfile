@@ -43,7 +43,7 @@ RUN git clone https://github.com/borglab/gtsam.git \
   -DGTSAM_BUILD_TESTS=OFF \
   -DGTSAM_WITH_TBB=OFF \
   -DGTSAM_BUILD_WITH_MARCH_NATIVE=OFF \
-  -DGTSAM_USE_SYSTEM_EIGEN=ON \
+  -DGTSAM_USE_SYSTEM_EIGEN=OFF \
   -DGTSAM_USE_SYSTEM_METIS=ON \
   && make -j$(nproc) \
   && make install \
