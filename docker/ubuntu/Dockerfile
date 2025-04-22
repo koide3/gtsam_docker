@@ -12,7 +12,7 @@ ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPA
 # Install apt-fast
 RUN apt-get update \
   && apt-get install --no-install-recommends -y software-properties-common gnupg ca-certificates \
-  && add-apt-repository ppa:apt-fast/stable \
+  && add-apt-repository --yes ppa:apt-fast/stable \
   && apt-get update \
   && apt-get install --no-install-recommends -y apt-fast \
   && apt-fast clean \
