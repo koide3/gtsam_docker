@@ -9,6 +9,10 @@ ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
 ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
+# --- workaround for 403 Forbidden on some Canonical mirrors -----------
+RUN printf 'Acquire::http::Pipeline-Depth "0";\nAcquire::http::No-Cache "true";\nAcquire::Retries "3";\n' \
+        > /etc/apt/apt.conf.d/99no-pipeline
+
 RUN apt-get update \
   && apt-get upgrade -y \
   # install dependencies
