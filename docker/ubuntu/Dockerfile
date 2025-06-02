@@ -1,7 +1,7 @@
-ARG BASE_IMAGE
+ARG BASE_IMAGE=ubuntu:noble
 
 FROM ${BASE_IMAGE}
-ARG GTSAM_TAG
+ARG GTSAM_TAG=4.2a9
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
@@ -9,28 +9,15 @@ ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
 ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
-# Install apt-fast
 RUN apt-get update \
-  && apt-get install --no-install-recommends -y software-properties-common gnupg ca-certificates \
-  && add-apt-repository --yes ppa:apt-fast/stable \
-  && apt-get update \
-  && apt-get install --no-install-recommends -y apt-fast \
-  && apt-fast clean \
-  && rm -rf /var/lib/apt/lists/*
-
-RUN echo debconf apt-fast/maxdownloads string 16 | debconf-set-selections && \
-  echo debconf apt-fast/dlflag boolean true | debconf-set-selections && \
-  echo debconf apt-fast/aptmanager string apt-get | debconf-set-selections
-
-RUN apt-fast update \
-  && apt-fast upgrade -y \
+  && apt-get upgrade -y \
   # install dependencies
-  && apt-fast install --no-install-recommends -y \
+  && apt-get install --no-install-recommends -y \
     wget nano build-essential clang lld libomp-dev \
     git cmake libeigen3-dev ca-certificates \
     libtbb-dev libboost-all-dev libgtest-dev libmetis-dev \
     libglm-dev libglfw3-dev libpng-dev libjpeg-dev \
-  && apt-fast clean \
+  && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /root
