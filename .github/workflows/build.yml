@@ -53,7 +53,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           file: ${{github.workspace}}/docker/ubuntu/Dockerfile
-          tags: koide3/gtsam_docker:${{ matrix.DISTRO.name }}.${{ matrix.GTSAM_TAG }}
+          tags: koide3/gtsam_docker:${{ matrix.DISTRO.name }}_gtsam${{ matrix.GTSAM_TAG }}
           build-args: |
             "GTSAM_TAG=${{ matrix.GTSAM_TAG }}"
             "BASE_IMAGE=${{ matrix.DISTRO.base_image }}"
